@@ -14,5 +14,9 @@ export const STORE = {
         default: null,
         key: 'model',
     }),
+    product: atom<ProductList | null>({
+        default: null,
+        key: 'product',
+    }),
 }
 
