@@ -1,26 +1,33 @@
 import { useRecoilState } from "recoil";
 import { STORE } from "../../store/store";
 import { SamsungClient } from "../../client/client";
-import { useCallback, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Product from "../Product/Product";
 
 const ProductGrid = () => {
   const [products, setProducts] = useRecoilState(STORE.products);
-
-  const getProducts = useCallback(async () => {
-    const client = new SamsungClient();
-
-    const products = await client.fetchProducts();
-
-    setProducts(products);
-  }, [setProducts]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    getProducts();
-  }, [getProducts]);
+    setLoading(true);
+    SamsungClient.fetchProducts()
+      .then((products) => {
+        setProducts(products);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, [setProducts]);
 
-  if (!products) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
   }
 
   return (
