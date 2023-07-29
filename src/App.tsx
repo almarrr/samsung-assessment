@@ -1,16 +1,8 @@
-import ActiveModel from "./components/ActiveModel/ActiveModel";
-import ProductGrid from "./components/ProductGrid/ProductGrid";
+import ProductGrid from "./pages/ProductGrid";
 import "./fonts/samsung-fonts.css";
 
 const App = () => {
-  return (
-    <>
-      <ActiveModel />
-      <section className="py-8">
-        <ProductGrid />
-      </section>
-    </>
-  );
+  return <ProductGrid />;
 };
 
 export default App;
