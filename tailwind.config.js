@@ -11,6 +11,10 @@ export default {
         samsung: ["SamsungOne", "sans-serif"],
         "samsung-heading": ["SamsungSharpSansBd", "sans-serif"],
       },
+      colors: {
+        "samsung-light": "#f5f5f5",
+        "samsung-blue": "#2189ff",
+      },
     },
   },
   plugins: [],
