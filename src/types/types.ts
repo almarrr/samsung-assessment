@@ -13,6 +13,13 @@ export interface ResultData {
     productList: ProductList[];
 }
 
+interface Award {
+    awardTitle: string;
+    awardDesc: string;
+    awardLink: string;
+    awardImg: string;
+}
+
 export interface ProductList {
     familyRecord: string;
     familyId: string;
@@ -32,7 +39,7 @@ export interface ProductList {
     thirdPASeller: null;
     isRecommended: null;
     chipOptions: ChipOption[];
-    awardList: any[];
+    awardList: Award[];
     quickLooks: any[];
     localBenefitList: LocalBenefitList[];
     modelList: ModelList[];
