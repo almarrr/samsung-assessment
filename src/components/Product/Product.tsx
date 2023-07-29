@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ModelList, ProductList } from "../../types/types";
 import ChipOptions from "../ChipOptions/ChipOptions";
 import Button from "../Button";
@@ -14,9 +14,9 @@ const Product: React.FC<ProductList> = (props) => {
 
   const [model, setModel] = useState<null | ModelList>(null);
 
-  const handleNavigate = () => {
-    navigate(`/mode/${modelCode}`);
-  };
+  const handleNavigate = useCallback(() => {
+    navigate(`/model/${modelCode}`);
+  }, [modelCode, navigate]);
 
   useEffect(() => {
     const result = props.modelList.find((model) => {
@@ -37,7 +37,10 @@ const Product: React.FC<ProductList> = (props) => {
   return (
     <div className="bg-white rounded-2xl relative flex flex-col justify-between">
       <div>
-        <button className="p-8" onClick={handleNavigate}>
+        <button
+          className="p-8 hover:opacity-75 transition-opacity duration-150"
+          onClick={handleNavigate}
+        >
           <img
             className="aspect-[16/10] object-contain w-full"
             src={model.thumbUrl}
@@ -45,7 +48,9 @@ const Product: React.FC<ProductList> = (props) => {
           />
         </button>
         <div className="p-4">
-          <h3 className="text-[16px] font-bold">{model.displayName}</h3>
+          <button className="hover:underline" onClick={handleNavigate}>
+            <h3 className="text-[16px] font-bold">{model.displayName}</h3>
+          </button>
           {props.chipOptions?.map((chip) => (
             <ChipOptions key={chip.fmyChipType} {...chip} />
           ))}
