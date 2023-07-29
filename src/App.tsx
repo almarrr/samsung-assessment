@@ -1,11 +1,15 @@
+import ActiveModel from "./components/ActiveModel/ActiveModel";
 import ProductGrid from "./components/ProductGrid/ProductGrid";
 import "./fonts/samsung-fonts.css";
 
 const App = () => {
   return (
-    <section className="py-8">
-      <ProductGrid />
-    </section>
+    <>
+      <ActiveModel />
+      <section className="py-8">
+        <ProductGrid />
+      </section>
+    </>
   );
 };
 
