@@ -1,9 +1,11 @@
+@import "css/buttons.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  @apply bg-[#f7f7f7];
+  @apply bg-samsung-light;
 }
 
 h1,
