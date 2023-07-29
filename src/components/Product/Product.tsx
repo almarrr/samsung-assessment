@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { ModelList, ProductList } from "../../types/types";
 import ChipOptions from "../ChipOptions/ChipOptions";
 import Button from "../Button";
-import { useSetRecoilState } from "recoil";
-import { STORE } from "../../store/store";
+
+import { useNavigate } from "react-router-dom";
 
 const Product: React.FC<ProductList> = (props) => {
   const [modelCode] = useState<string | null>(
     props.modelList[0].modelCode || null
   );
 
-  const setActiveModel = useSetRecoilState(STORE.activeModelCode);
+  const navigate = useNavigate();
 
   const [model, setModel] = useState<null | ModelList>(null);
 
-  const toggleActiveModel = () => {
-    setActiveModel(modelCode);
+  const handleNavigate = () => {
+    navigate(`/mode/${modelCode}`);
   };
 
   useEffect(() => {
@@ -28,8 +28,6 @@ const Product: React.FC<ProductList> = (props) => {
     }
 
     setModel(result);
-
-    console.log(result);
   }, [modelCode, props.modelList]);
 
   if (!model) {
@@ -39,7 +37,7 @@ const Product: React.FC<ProductList> = (props) => {
   return (
     <div className="bg-white rounded-2xl relative flex flex-col justify-between">
       <div>
-        <button className="p-8" onClick={toggleActiveModel}>
+        <button className="p-8" onClick={handleNavigate}>
           <img
             className="aspect-[16/10] object-contain w-full"
             src={model.thumbUrl}
@@ -59,7 +57,7 @@ const Product: React.FC<ProductList> = (props) => {
         </ul>
       </div>
       <div className="px-4 pb-8 pt-2 flex justify-center">
-        <Button label="Ontdek" onClick={toggleActiveModel} />
+        <Button label="Ontdek" onClick={handleNavigate} />
       </div>
     </div>
   );
