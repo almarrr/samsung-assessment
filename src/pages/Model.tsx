@@ -2,13 +2,14 @@ import { useModel } from "../hooks/useModel";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useParams } from "react-router-dom";
+import Awards from "../components/Awards/Awards";
 
 export const Model = () => {
   const { modelCode } = useParams();
 
   const [heroImageLoaded, setHeroImageLoaded] = useState(false);
 
-  const { model } = useModel({ modelCode });
+  const { model, product } = useModel({ modelCode });
 
   useEffect(() => {
     if (!model) {
@@ -18,11 +19,16 @@ export const Model = () => {
     setHeroImageLoaded(true);
   }, [model]);
 
-  if (!modelCode) {
-    return <></>;
-  }
+  const handleBuyNow = () => {
+    if (!model) return;
 
-  if (!model) {
+    window.open(
+      `${import.meta.env.VITE_URL_PREFIX}/${model.originPdpUrl}`,
+      "_blank"
+    );
+  };
+
+  if (!modelCode || !model || !product) {
     return <></>;
   }
 
@@ -33,12 +39,17 @@ export const Model = () => {
       >
         <div className="container flex justify-between items-center">
           <div>
-            <h1 className="text-[24px]">{model.displayName}</h1>
+            <h1 className="text-[18px] lg:text-[24px]">{model.displayName}</h1>
 
-            <div className="opacity-50 font-bold">{model.modelName}h2</div>
+            <div className="text-[14px] lg:text-[18px] opacity-50 font-bold">
+              {model.modelName}h2
+            </div>
           </div>
 
-          <button className="btn bg-samsung-blue text-white">
+          <button
+            className="btn bg-samsung-blue text-white"
+            onClick={handleBuyNow}
+          >
             {model.ctaLocalText || "Buy Now"}
           </button>
         </div>
@@ -49,9 +60,9 @@ export const Model = () => {
       <div className="fixed bottom-0 left-0 w-full h-[20vh] bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
 
       <div className="container">
-        <div className="min-h-screen">
+        <div className="min-h-[50vh] lg:min-h-screen">
           <h1
-            className="text-[58px] text-center delay-700 transition-opacity duration-1000 ease-in-out"
+            className="text-[32px] md:text-[48px] lg:text-[58px] text-center delay-700 transition-opacity duration-1000 ease-in-out"
             style={{ opacity: heroImageLoaded ? 1 : 0 }}
           >
             {model.displayName}
@@ -84,24 +95,32 @@ export const Model = () => {
             return (
               <div
                 key={image}
-                className={`flex justify-between items-center ${
+                className={`lg:flex lg:justify-between lg:items-center ${
                   index % 2 === 0 ? "flex-row-reverse" : "flex-row"
                 }`}
               >
                 <div
-                  className={`w-4/12 ${index % 2 === 0 ? "pl-12" : "pr-12"}`}
+                  className={`text-center lg:text-left lg:w-4/12 ${
+                    index % 2 === 0 ? "lg:pl-12" : "lg:pr-12"
+                  }`}
                 >
                   <h2 className="mx-auto text-[36px]">{model.usp[index]}</h2>
                 </div>
                 <img
                   src={image}
                   alt={image}
-                  className="w-8/12 mx-auto object-fill"
+                  className="lg:w-8/12 mx-auto object-fill"
                 />
               </div>
             );
           }
         })}
+        <div>
+          {product.localBenefitList.map(({ localBenefitText }) => {
+            return <div key={localBenefitText}>{localBenefitText}</div>;
+          })}
+        </div>
+        <Awards modelCode={modelCode} />
       </div>
     </div>,
     document.body
