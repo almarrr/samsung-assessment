@@ -27,10 +27,13 @@ const GetProducts = () => {
   }, [getProducts, setProducts]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <></>;
   }
 
   if (error) {
+    // log error to external service?
+    console.error(JSON.stringify(error));
+
     return <div>Error: {error.message}</div>;
   }
 
