@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { ModelList, ProductList } from "../../types/types";
 import ChipOptions from "../ChipOptions/ChipOptions";
-import Button from "../Button";
+import Button from "../shared/Button/Button";
 
 import { useNavigate } from "react-router-dom";
+import ProductRating from "./ProductRating/ProductRating";
+
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Product: React.FC<ProductList> = (props) => {
   const [modelCode] = useState<string | null>(
@@ -35,13 +38,15 @@ const Product: React.FC<ProductList> = (props) => {
   }
 
   return (
-    <div className="bg-white rounded-2xl relative flex flex-col justify-between">
+    <div className="bg-white rounded-2xl min-[550px] relative flex flex-col justify-between">
       <div>
         <button
           className="p-8 hover:opacity-75 transition-opacity duration-150"
           onClick={handleNavigate}
         >
-          <img
+          {model.galleryImage.length}
+          <LazyLoadImage
+            threshold={100}
             className="aspect-[16/10] object-contain w-full"
             src={model.thumbUrl}
             alt={model.displayName}
@@ -56,7 +61,14 @@ const Product: React.FC<ProductList> = (props) => {
           ))}
         </div>
       </div>
-      <div className="text-center font-bold text-[18px]">{model.price},-</div>
+      {}
+      <div className="text-center font-bold text-[18px]">
+        {model.price ? `${model.price},-` : "Prijs op aanvraag"}
+      </div>
+      <ProductRating
+        rating={parseInt(model.ratings)}
+        numberOfReviews={parseInt(model.reviewCount)}
+      />
       <div className="px-4 pb-8 pt-2 flex justify-center">
         <Button label="Ontdek" onClick={handleNavigate} />
       </div>
