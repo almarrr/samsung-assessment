@@ -108,7 +108,7 @@ export const Model = () => {
               </div>
               <img
                 src={image}
-                alt={image}
+                alt={model.displayName}
                 className="lg:w-8/12 mx-auto object-fill"
               />
             </div>
