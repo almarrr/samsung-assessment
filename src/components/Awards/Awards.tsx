@@ -20,17 +20,16 @@ const Awards: React.FC<IProps> = ({ modelCode }) => {
             className="block relative bg-samsung-light/10 hover:bg-samsung-light/20 transition-all duration-150 w-1/3 px-10 py-12 rounded-lg"
             rel="noreferrer"
           >
-            <>
-              {awardImg && (
-                <img
-                  src={awardImg}
-                  alt={awardTitle}
-                  className="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 h-full object-contain max-w-[100px]"
-                />
-              )}
-              <h3>{awardTitle}</h3>
-              <p>{awardDesc}</p>
-            </>
+            <h3>{awardTitle}</h3>
+            <p className="text-[16px] pt-3 text-center">{awardDesc}</p>
+
+            {awardImg && (
+              <img
+                src={awardImg}
+                alt={awardTitle}
+                className="block mx-auto pt-8 object-contain max-w-[100px]"
+              />
+            )}
           </a>
         )
       )}
