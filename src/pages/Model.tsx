@@ -1,6 +1,5 @@
 import { useModel } from "../hooks/useModel";
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { useParams } from "react-router-dom";
 import Awards from "../components/Awards/Awards";
 
@@ -32,7 +31,7 @@ export const Model = () => {
     return <></>;
   }
 
-  return createPortal(
+  return (
     <div className="fixed top-0 left-0 bg-black text-white z-[100] w-screen h-screen py-[20vh] overflow-y-scroll">
       <div
         className={`fixed top-0 left-0 w-full bg-white/5 backdrop-blur z-10 border-b border-white/10 py-3  transition-all duration-300 ease-in-out`}
@@ -42,7 +41,7 @@ export const Model = () => {
             <h1 className="text-[18px] lg:text-[24px]">{model.displayName}</h1>
 
             <div className="text-[14px] lg:text-[18px] opacity-50 font-bold">
-              {model.modelName}h2
+              {model.modelName}
             </div>
           </div>
 
@@ -74,7 +73,7 @@ export const Model = () => {
             {model.usp[0]}.
           </h2>
           {model.galleryImageLarge[0] && (
-            <div className="mb-8">
+            <div className="mb-20">
               <img
                 src={model.galleryImageLarge[0]}
                 alt={model.displayName}
@@ -122,7 +121,6 @@ export const Model = () => {
         </div>
         <Awards modelCode={modelCode} />
       </div>
-    </div>,
-    document.body
+    </div>
   );
 };
