@@ -114,11 +114,7 @@ export const Model = () => {
             );
           }
         })}
-        <div>
-          {product.localBenefitList.map(({ localBenefitText }) => {
-            return <div key={localBenefitText}>{localBenefitText}</div>;
-          })}
-        </div>
+
         <Awards modelCode={modelCode} />
       </div>
     </div>
