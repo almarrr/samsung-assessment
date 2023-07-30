@@ -13,8 +13,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/mode/:modelCode",
+    path: "/model/:modelCode",
     element: <Model />,
+  },
+  {
+    path: "*",
+    element: <App />,
   },
 ]);
 
