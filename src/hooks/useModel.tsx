@@ -1,6 +1,7 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { STORE } from "../store/store";
 import { useCallback, useEffect } from "react";
+import { findProductAndModelByModelCode } from "../helpers/find-model";
 
 interface IParams {
   modelCode?: string;
@@ -17,27 +18,22 @@ export const useModel = (params: IParams) => {
 
   const findModel = useCallback(
     (modelCode: string) => {
-      if (!modelCode || !products.length) return;
-
-      const model =
-        products
-          .map(({ modelList }) => {
-            return modelList.find((x) => x.modelCode === modelCode);
-          })
-          .filter((x) => x !== undefined)[0] || null;
-
-      const product = products.find((x) => {
-        return x.modelList.find((x) => x.modelCode === modelCode);
-      });
-
-      if (product) {
-        setProduct(product);
+      if (!modelCode || products.length === 0) {
+        console.log("no model code or products");
+        return;
       }
+
+      const { model, product } = findProductAndModelByModelCode(
+        modelCode,
+        products
+      );
 
       if (model) {
         setModel(model);
-        document.title = `${model.displayName}`;
-        return;
+      }
+
+      if (product) {
+        setProduct(product);
       }
     },
     [products, setModel, setProduct]
