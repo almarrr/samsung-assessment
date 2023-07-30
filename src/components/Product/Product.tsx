@@ -47,7 +47,7 @@ const Product: React.FC<ProductList> = (props) => {
             alt={model.displayName}
           />
         </button>
-        <div className="p-4">
+        <div className="p-4 text-center">
           <button className="hover:underline" onClick={handleNavigate}>
             <h3 className="text-[16px] font-bold">{model.displayName}</h3>
           </button>
@@ -55,12 +55,8 @@ const Product: React.FC<ProductList> = (props) => {
             <ChipOptions key={chip.fmyChipType} {...chip} />
           ))}
         </div>
-        <ul className="px-8 pb-4 list-disc text-[14px] grid grid-cols-1 gap-2">
-          {model.usp.slice(0, 2).map((usp) => (
-            <li key={usp}>{usp}</li>
-          ))}
-        </ul>
       </div>
+      <div className="text-center font-bold text-[18px]">{model.price},-</div>
       <div className="px-4 pb-8 pt-2 flex justify-center">
         <Button label="Ontdek" onClick={handleNavigate} />
       </div>
