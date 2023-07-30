@@ -17,7 +17,7 @@ const Awards: React.FC<IProps> = ({ modelCode }) => {
           <a
             href={awardLink}
             target="_blank"
-            className="block relative bg-samsung-light/10 hover:bg-samsung-light/20 transition-all duration-150 w-1/3 px-10 py-12 rounded-lg min-h-[300px]"
+            className="block relative bg-samsung-light/10 hover:bg-samsung-light/20 transition-all duration-150 w-1/3 px-10 py-12 rounded-lg"
             rel="noreferrer"
           >
             <>
