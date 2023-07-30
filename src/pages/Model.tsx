@@ -90,29 +90,29 @@ export const Model = () => {
         </div>
 
         {model.galleryImageLarge.slice(1).map((image, index) => {
-          if (model.usp.length > 0 && model.usp.length === index + 1) {
-            return (
+          return (
+            <div
+              key={image}
+              className={`lg:flex lg:justify-between lg:items-center ${
+                index % 2 === 0 ? "flex-row-reverse" : "flex-row"
+              }`}
+            >
               <div
-                key={image}
-                className={`lg:flex lg:justify-between lg:items-center ${
-                  index % 2 === 0 ? "flex-row-reverse" : "flex-row"
+                className={`text-center lg:text-left lg:w-4/12 ${
+                  index % 2 === 0 ? "lg:pl-12" : "lg:pr-12"
                 }`}
               >
-                <div
-                  className={`text-center lg:text-left lg:w-4/12 ${
-                    index % 2 === 0 ? "lg:pl-12" : "lg:pr-12"
-                  }`}
-                >
-                  <h2 className="mx-auto text-[36px]">{model.usp[index]}</h2>
-                </div>
-                <img
-                  src={image}
-                  alt={image}
-                  className="lg:w-8/12 mx-auto object-fill"
-                />
+                <h2 className="mx-auto text-[36px]">
+                  model.usp[index] || "Lorem Ipsum Dolor Sit Amet."
+                </h2>
               </div>
-            );
-          }
+              <img
+                src={image}
+                alt={image}
+                className="lg:w-8/12 mx-auto object-fill"
+              />
+            </div>
+          );
         })}
 
         <Awards modelCode={modelCode} />
