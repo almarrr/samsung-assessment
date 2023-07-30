@@ -36,6 +36,7 @@ export const useModel = (params: IParams) => {
 
       if (model) {
         setModel(model);
+        document.title = `${model.displayName}`;
         return;
       }
     },
