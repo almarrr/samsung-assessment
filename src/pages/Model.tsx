@@ -103,7 +103,7 @@ export const Model = () => {
                 }`}
               >
                 <h2 className="mx-auto text-[36px]">
-                  model.usp[index] || "Lorem Ipsum Dolor Sit Amet."
+                  {model.usp[index] || "Lorem Ipsum Dolor Sit Amet."}
                 </h2>
               </div>
               <img
